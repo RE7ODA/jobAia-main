@@ -2,16 +2,17 @@ const feedback = require("../../../DB/models/Feedback.model");
 
 const PostComment = async (req, res) => {
     try {
-        const id  = req.params.id;
-        const {createdFor ,comment, rating} = req.body;
+        const userId  = req.params.userId;
+        const JobId  = req.params.JobId;
+        const {comment, rating} = req.body;
         const newFeetback = await feedback.create({
-            createdBy: id,
-            createdFor,
+            createdBy: userId,
+            createdFor: JobId,
             comment,
             rating,
         });
-        await feedback.findById(newFeetback._id).populate({path:"createdBy", select: "userName email"});
-        return res.status(200).json({ message: "feetback added successfully", data: req.body });
+        const Feedback = await feedback.findById(newFeetback._id).populate([{path:"createdBy", select: {CompanyName: 1 , email : 1 }}, {path:"createdFor", select: "_id"}]);
+        return res.status(200).json({ message: "feetback added successfully", data: Feedback });
     } catch (err) {
         return res.status(401).json({ message: "something went wrong", err: err.message });
     }
@@ -19,7 +20,7 @@ const PostComment = async (req, res) => {
 
 const GetComments =  async (req, res) => {
     try {
-        const feedbacks = await feedback.find({}).populate({path:"createdBy", select: "userName email"});
+        const feedbacks = await feedback.find({}).populate({path:"createdBy", select: "CompanyName email"});
 
         return res.status(200).json({ message: "Success", feedbacks});
     } catch (err) {

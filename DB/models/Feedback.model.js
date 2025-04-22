@@ -25,6 +25,6 @@ const feetbackSchema = new mongoose.Schema({
       }
 })
 
-const feetback = mongoose.model("Feetback", feetbackSchema);
+const feedback = mongoose.model("Feedback", feetbackSchema);
 
-module.exports = feetback
+module.exports = feedback

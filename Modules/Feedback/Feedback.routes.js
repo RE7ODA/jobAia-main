@@ -3,7 +3,7 @@ const router = express.Router();
 const {PostComment , GetComments} = require("../Feedback/Controller/Feedback.controller");
 
 
-router.post("/feedback/:id", PostComment);
+router.post("/feedback/:userId/:JobId", PostComment);
 
 router.get("/feedback", GetComments);
 

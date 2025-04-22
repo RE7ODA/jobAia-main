@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 const ApplicationSchema = new mongoose.Schema({
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  createdFor: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "JobPost",
+  },
   firstName: {
     type: String,
     required: true,

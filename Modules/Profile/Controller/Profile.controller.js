@@ -34,7 +34,8 @@ const Postdetails = async (req, res) => {
             path: "personalInfo",
             select: {
               CompanyName: 1,
-              email: 1
+              email: 1,
+              role: 1
             }
           });
         return res.status(200).json({ message: "details added successfully", data: foundProfile });

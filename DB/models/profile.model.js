@@ -35,9 +35,6 @@ const profileSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    skils:{
-        type: [String],
-    },
     workExperience:{
         type: [String],
     },
